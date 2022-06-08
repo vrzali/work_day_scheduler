@@ -3,6 +3,22 @@ $("#currentDay").text(moment().format('dddd MMMM Do YYYY'));
 
 var saveBtn = $(".saveBtn");
 
+function timeBlockColor() {
+    var hour = moment().hours();
+
+    $(".time-block").each(function() {
+        var currHour = parseInt($(this).attr("id"));
+
+        if (currHour > hour) {
+            $(this).addClass("future");
+        } else if (currHour === hour) {
+            $(this).addClass("present");
+        } else {
+            $(this).addClass("past");
+        }
+    })
+};
+
 saveBtn.on("click", function() {
 
     var time = $(this).siblings(".hour").text();
@@ -19,22 +35,6 @@ function usePlanner() {
             $(this).siblings(".plan").val(currPlan);
         }
     });
-}
-
-function timeBlockColor() {
-    var hour = moment().hours();
-
-    $(".time-block").each(function() {
-        var currHour = parseInt($(this).attr("id"));
-
-        if (currHour > hour) {
-            $(this).addClass("future");
-        } else if (currHour === hour) {
-            $(this).addClass("present");
-        } else {
-            $(this).addClass("past");
-        }
-    })
 };
 
 timeBlockColor();
